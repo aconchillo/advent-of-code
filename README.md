@@ -7,7 +7,6 @@ Code](https://adventofcode.com) challenge. The code is written in
 
 # Why Guile?
 
-Because it's a lot of fun! It makes you think diferently than what you are
-probably used to and I just want to learn and practice more with it.
+Because it's a lot of fun!
 
 Happy Hacking!
