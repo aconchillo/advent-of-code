@@ -23,6 +23,7 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
                  (get-line port))))))
 
 (define (process-changes changes rem-changes frequency freq-seen)
+  (hashv-set! freq-seen frequency #t)
   (cond
    ((null? rem-changes)
     (process-changes changes changes frequency freq-seen))
@@ -31,12 +32,10 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
       (cond
        ((hashv-ref freq-seen new-freq) new-freq)
        (else
-        (hashv-set! freq-seen new-freq #t)
         (process-changes changes (cdr rem-changes) new-freq freq-seen)))))))
 
 (define (part2 changes)
   (let ((freq-seen (make-hash-table)))
-    (hashv-set! freq-seen 0 #t)
     (process-changes changes changes 0 freq-seen)))
 
 (define (main . args)
