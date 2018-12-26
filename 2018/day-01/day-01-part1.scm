@@ -31,4 +31,4 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
      (let ((changes (call-with-input-file file-name load-changes)))
        (display (part1 changes))))
     (else
-     (format (current-error-port) "Usage: ./day-01-part1 <input-file>~%"))))
+     (format (current-error-port) "Usage: ./day-01-part1.scm <input-file>~%"))))
