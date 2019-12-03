@@ -5,7 +5,7 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
 
 ;;
 ;; Advent Of Code 2019
-;; Day 1
+;; Day 1 (Part 1)
 ;;
 ;; Aleix Conchillo Flaque <aconchillo@gmail.com>
 ;;
@@ -34,4 +34,4 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
      (let ((masses (call-with-input-file file-name load-masses)))
        (display (fuel masses))))
     (else
-     (format (current-error-port) "Usage: ./day-01.scm <input-file>~%"))))
+     (format (current-error-port) "Usage: ./day-01-part1.scm <input-file>~%"))))
