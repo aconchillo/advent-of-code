@@ -22,8 +22,11 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
      (else (loop (append masses (list (string->number line)))
                  (get-line port))))))
 
+(define (compute-fuel value)
+  (- (floor (/ value 3)) 2))
+
 (define (fuel masses)
-  (fold + 0 (map (lambda (m) (- (floor (/ m 3)) 2)) masses)))
+  (fold + 0 (map compute-fuel masses)))
 
 (define (main . args)
   (pmatch args
