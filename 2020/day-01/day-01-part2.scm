@@ -16,12 +16,11 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
 (define (vector-max v)
   (apply max (vector->list v)))
 
-;; We return a vector instead of a list so we can skip values.
 (define (load-entries port)
   (let loop ((entries '())
              (line (get-line port)))
     (cond
-     ((eof-object? line) (list->vector (reverse entries)))
+     ((eof-object? line) (reverse entries))
      (else (loop (cons (string->number line) entries)
                  (get-line port))))))
 
@@ -70,6 +69,6 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
   (pmatch args
     ((,file-name)
      (let ((entries (call-with-input-file file-name load-entries)))
-       (display (apply * (fix-report-3 entries 2020)))))
+       (display (apply * (fix-report-3 (list->vector entries) 2020)))))
     (else
      (format (current-error-port) "Usage: ./day-01-part2.scm <input-file>~%"))))
