@@ -40,8 +40,8 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
 
 (define (day-02-part1 box-ids)
   (let* ((counters (map box-id-char-counter box-ids))
-         (count2 (fold (lambda (v prev) (+ prev (if (box-id-with-2? v) 1 0))) 0 counters))
-         (count3 (fold (lambda (v prev) (+ prev (if (box-id-with-3? v) 1 0))) 0 counters)))
+         (count2 (count box-id-with-2? counters))
+         (count3 (count box-id-with-3? counters)))
     (* count2 count3)))
 
 (define (main . args)

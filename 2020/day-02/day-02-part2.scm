@@ -44,9 +44,8 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
          (char=? char (string-ref password pos2)))))
 
 (define (count-valid-passwords passwords)
-  (fold (lambda (elem prev)
-          (if (validate-password (car elem) (cdr elem)) (+ prev 1) prev))
-        0 passwords))
+  (count (lambda (elem) (validate-password (car elem) (cdr elem)))
+         passwords))
 
 (define (load-passwords port)
   (let loop ((entries '())

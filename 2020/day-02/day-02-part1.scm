@@ -33,13 +33,9 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
                               (string->number (cadr part-min-max)))
           part-password)))
 
-;; We could use a loop and use (string-ref) to perform a simple count but
-;; (fold) is just more fancy.
 (define (string-count-char str c)
-  (let ((chars (string->list str)))
-    (fold (lambda (elem prev)
-            (if (char=? elem c) (+ prev 1) prev))
-          0 chars)))
+  (count (lambda (elem) (char=? elem c))
+         (string->list str)))
 
 (define (validate-password rule password)
   (let ((count (string-count-char password (password-rule-char rule))))
@@ -47,9 +43,8 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
          (<= count (password-rule-max rule)))))
 
 (define (count-valid-passwords passwords)
-  (fold (lambda (elem prev)
-          (if (validate-password (car elem) (cdr elem)) (+ prev 1) prev))
-        0 passwords))
+  (count (lambda (elem) (validate-password (car elem) (cdr elem)))
+         passwords))
 
 (define (load-passwords port)
   (let loop ((entries '())
