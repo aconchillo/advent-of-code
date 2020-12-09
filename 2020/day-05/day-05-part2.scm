@@ -47,8 +47,8 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
     (+ (* (car seat) 8) (cdr seat))))
 
 ;; We could (sort) and find a gap. Sorting it's usually O(nlogn), so since
-;; seat ids are sequential it's probably better to just create a vector and
-;; then look for the missing element.
+;; seat ids are sequential it's better to just create a vector and then look
+;; for the missing element.
 ;;
 ;; This has an O(n) complexity.
 (define (find-my-seat-id passes)
