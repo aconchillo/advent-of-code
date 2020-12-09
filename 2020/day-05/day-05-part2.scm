@@ -61,6 +61,7 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
        ;; identifier as that will be our index 0 in the vector.
        (vector-set! seats (- elem min-seat-id) #t))
      seat-ids)
+    ;; Find the index that is false (not) and add the minimum seat id.
     (+ (vector-index not seats) min-seat-id)))
 
 (define (main . args)
