@@ -34,7 +34,7 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
 (define (load-passports port)
   (let loop ((passports '()))
     (cond
-     ((eof-object? (peek-char port) ) (reverse passports))
+     ((eof-object? (peek-char port)) passports)
      (else
       (loop (cons (load-passport port) passports))))))
 

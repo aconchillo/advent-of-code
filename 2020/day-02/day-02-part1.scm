@@ -50,7 +50,7 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
   (let loop ((entries '())
              (line (get-line port)))
     (cond
-     ((eof-object? line) (reverse entries))
+     ((eof-object? line) entries)
      (else (loop (cons (parse-password-line line) entries)
                  (get-line port))))))
 
