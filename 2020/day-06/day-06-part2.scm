@@ -10,8 +10,7 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
 ;; Aleix Conchillo Flaque <aconchillo@gmail.com>
 ;;
 
-(use-modules (ice-9 regex)
-             (ice-9 textual-ports)
+(use-modules (ice-9 textual-ports)
              (srfi srfi-1)
              (system base pmatch))
 
