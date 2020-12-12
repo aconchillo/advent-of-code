@@ -77,8 +77,8 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
     (let loop ((pc 0) (acc 0))
       (cond
        ((>= pc (vector-length program)) acc)
-       ((vector-ref execution pc)
-        (throw 'loop-error))
+       ;; There shouldn't be any loops.
+       ((vector-ref execution pc) (throw 'loop-error))
        (else
         (vector-set! execution pc #t)
         (let* ((inst (vector-ref program pc)) (op-code (car inst)) (argument (cdr inst)))
