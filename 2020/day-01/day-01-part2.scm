@@ -28,7 +28,7 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
 ;; contains ARR[b] = a where b = 2020 - a and a is the number we are currently
 ;; evaluating from the given list.
 ;;
-;; This has an O(n) complexity.
+;; This has O(n) complexity.
 (define (fix-report entries total skip)
   (let* ((max-value (vector-max entries))
          (sums (make-vector (+ max-value 1) -1)))

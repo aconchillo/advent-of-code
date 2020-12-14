@@ -50,7 +50,7 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
 ;; seat ids are sequential it's better to just create a vector and then look
 ;; for the missing element.
 ;;
-;; This has an O(n) complexity.
+;; This has O(n) complexity.
 (define (find-my-seat-id passes)
   (let* ((seat-ids (map compute-seat-id passes))
          (min-seat-id (apply min seat-ids))

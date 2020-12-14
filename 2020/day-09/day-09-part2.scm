@@ -53,7 +53,7 @@ exec guile -l $0 -c "(apply main (cdr (command-line)))" "$@"
 ;; Since the block is contiguous just use two pointers and move them according
 ;; to the resulting sum.
 ;;
-;; This has an O(n) complexity.
+;; This has O(n) complexity.
 (define (find-contiguous-set numbers sum)
   (let loop ((a 0) (b 1)
              (current (+ (vector-ref numbers 0) (vector-ref numbers 1))))
