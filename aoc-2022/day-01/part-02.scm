@@ -6,7 +6,8 @@
 ;;
 
 (define-module (aoc-2022 day-01 part-02)
-  #:use-module (ice-9 textual-ports))
+  #:use-module (ice-9 textual-ports)
+  #:export (solve))
 
 (define (solve port)
   (let loop ((calories '())
