@@ -6,9 +6,7 @@
 ;;
 
 (define-module (aoc-2022 day-03 part-01)
-  #:use-module (ice-9 match)
   #:use-module (ice-9 textual-ports)
-  #:use-module (srfi srfi-1)
   #:export (solve))
 
 (define (item-priority item)
