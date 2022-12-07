@@ -14,23 +14,12 @@
 (define (item-priority item)
   (- (char->integer item) (if (char-lower-case? item) 96 38)))
 
-(define (find-wrong-item-priority line)
-  (let* ((rucksack (string->list line))
-         (mid (/ (length rucksack) 2)))
-    (let loop ((i 0)
-               (items rucksack)
-               (h (make-hash-table)))
-      (cond
-       ((< i mid)
-        (hash-set! h (car items) #t)
-        (loop (1+ i) (cdr items) h))
-       (else
-        (if (hashq-ref h (car items))
-            (item-priority (car items))
-            (loop (1+ i) (cdr items) h)))))))
+(define (find-wrong-item-priority rucksack)
+  (let* ((mid (/ (length rucksack) 2)))
+    (item-priority (car (lset-intersection eq? (take rucksack mid) (take-right rucksack mid))))))
 
 (define (solve port)
-  (let loop ((sum 0) (line (get-line port)))
+  (let loop ((sum 0))
     (cond
-     ((eof-object? line) sum)
-     (else (loop (+ sum (find-wrong-item-priority line)) (get-line port))))))
+     ((eof-object? (peek-char port)) sum)
+     (else (loop (+ sum (find-wrong-item-priority (string->list (get-line port)))))))))

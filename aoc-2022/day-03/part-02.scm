@@ -14,25 +14,16 @@
 (define (item-priority item)
   (- (char->integer item) (if (char-lower-case? item) 96 38)))
 
+
 (define (find-group-badge-priority group)
-  (let loop-rucksack ((h (make-hash-table))
-                      (rucksacks group))
-    (let loop ((items (delete-duplicates (string->list (car rucksacks)))))
-      (cond
-       ((null? items) (loop-rucksack h (cdr rucksacks)))
-       (else
-        (hash-set! h (car items) (1+ (hashq-ref h (car items) 0)))
-        (cond
-         ((eq? (hashq-ref h (car items)) 3)
-          (item-priority (car items)))
-         (else (loop (cdr items)))))))))
+  (item-priority (car (apply lset-intersection eq? group))))
 
 (define (solve port)
   (let loop ((sum 0))
     (cond
      ((eof-object? (peek-char port)) sum)
      (else
-      (let ((group (list (get-line port)
-                         (get-line port)
-                         (get-line port))))
+      (let ((group (list (string->list (get-line port))
+                         (string->list (get-line port))
+                         (string->list (get-line port)))))
         (loop (+ sum (find-group-badge-priority group))))))))
